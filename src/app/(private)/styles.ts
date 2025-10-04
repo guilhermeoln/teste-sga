@@ -22,6 +22,7 @@ export const RootWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   flex: 0.85,
+  overflow: "auto",
 
   [theme.breakpoints.down("md")]: {
     flex: 0.9,
