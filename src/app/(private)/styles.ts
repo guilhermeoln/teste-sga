@@ -9,13 +9,21 @@ export const LayoutWrapper = styled(Box)({
   minHeight: "100vh",
 });
 
-export const NavbarWrapper = styled(Box)({
+export const NavbarWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flex: 0.15,
-});
 
-export const ChildrenWrapper = styled(Box)({
+  [theme.breakpoints.down("md")]: {
+    flex: 0.1,
+  },
+}));
+
+export const ChildrenWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flex: 0.85,
   padding: "15px",
-});
+
+  [theme.breakpoints.down("md")]: {
+    flex: 0.9,
+  },
+}));

@@ -23,6 +23,10 @@ export const NavItemWrapper = styled(Box, {
   alignItems: "center",
   justifyContent: "flex-start",
   transition: "background-color 0.2s ease",
+
+  [theme.breakpoints.down("md")]: {
+    justifyContent: "center",
+  },
 }));
 
 export const NavItemLabel = styled(Typography, {
@@ -31,4 +35,8 @@ export const NavItemLabel = styled(Typography, {
   color: isActive ? theme.palette.common.white : theme.palette.common.black,
   fontWeight: 500,
   display: "flex",
+
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
 }));
