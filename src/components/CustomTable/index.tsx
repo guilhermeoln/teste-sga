@@ -134,11 +134,11 @@ export default function CustomTable<T>({
             disabled={currentPage === 1}
             sx={{ padding: 0, height: 25 }}
           >
-            <MdArrowLeft color="white" />
+            <MdArrowLeft color="black" />
           </IconButton>
 
           <PageNumberBox>
-            <Typography color="white">{currentPage}</Typography>
+            <Typography color="black">{currentPage}</Typography>
           </PageNumberBox>
 
           <IconButton
@@ -146,7 +146,7 @@ export default function CustomTable<T>({
             disabled={currentPage === totalPages}
             sx={{ padding: 0, height: 25 }}
           >
-            <MdArrowRight color="white" />
+            <MdArrowRight color="black" />
           </IconButton>
         </PaginationWrapper>
       )}

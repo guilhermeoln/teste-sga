@@ -8,7 +8,7 @@ export const TableWrapper = styled(Box)({
 
 export const PaginationWrapper = styled(Box)({
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "flex-end",
   alignItems: "center",
   marginTop: "16px",
   gap: "8px",
