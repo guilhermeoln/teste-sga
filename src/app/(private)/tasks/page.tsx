@@ -17,7 +17,7 @@ export default function Tasks() {
       <CustomTable<Task>
         columns={columns}
         data={tasks}
-        rowsPerPage={1}
+        rowsPerPage={5}
         emptyMessage="Nenhuma tarefa encontrada"
       />
     </>
