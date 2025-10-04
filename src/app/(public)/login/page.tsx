@@ -5,6 +5,7 @@ import { Form, Wrapper } from "./styles";
 import { Button } from "@mui/material";
 import Image from "next/image";
 import useContainer from "./useContainer";
+import { CiLock, CiUser } from "react-icons/ci";
 
 export default function Login() {
   const { register, errors, handleSubmit, handleLogin } = useContainer();
@@ -17,6 +18,7 @@ export default function Login() {
           {...register("username")}
           label="Usuário"
           placeholder="Digite o seu usuário"
+          leftIcon={<CiUser />}
           isInvalid={!!errors?.username}
           errorMessage={errors?.username?.message}
           isRequired
@@ -26,6 +28,7 @@ export default function Login() {
           {...register("password")}
           label="Senha"
           placeholder="Digite a sua senha"
+          leftIcon={<CiLock />}
           isInvalid={!!errors?.password}
           errorMessage={errors?.password?.message}
           isRequired
