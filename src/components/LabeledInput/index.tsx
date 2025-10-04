@@ -4,7 +4,7 @@ import React, { ChangeEvent } from "react";
 import { InputAdornment } from "@mui/material";
 import { Wrapper, Label, RequiredText, StyledTextField } from "./styles";
 
-interface LabeledInputProps {
+interface Props {
   label?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -29,7 +29,7 @@ export default function LabeledInput({
   leftIcon = null,
   rightIcon = null,
   ...otherProps
-}: LabeledInputProps) {
+}: Props) {
   return (
     <Wrapper>
       {label && (
