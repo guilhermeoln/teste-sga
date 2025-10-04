@@ -15,3 +15,9 @@ export type Task = {
   priority: "low" | "medium" | "high";
   status: "pending" | "inProgress" | "done";
 };
+
+export enum CacheKeysEnum {
+  USER = "@sga/user",
+  TASKS = "@sga/tasks",
+  TAGS = "@sga/tags",
+}

@@ -1,11 +1,9 @@
 "use client";
 
-const keyPrefix = "@sga/";
-
 export const setCache = (key: string, value: string) => {
-  return localStorage.setItem(`${keyPrefix}${key}`, value);
+  return localStorage.setItem(key, value);
 };
 
 export const getCache = (key: string) => {
-  return localStorage.getItem(`${keyPrefix}${key}`);
+  return localStorage.getItem(key);
 };

@@ -1,5 +1,11 @@
+"use client";
+
 import useFormValidation from "@/hooks/useFormValidation";
+import { setCache } from "@/services/cache";
+import login from "@/services/serverActions/login";
+import { CacheKeysEnum } from "@/types";
 import loginSchema from "@/validations/login";
+import { useRouter } from "next/navigation";
 
 type LoginProps = {
   username: string;
@@ -11,8 +17,15 @@ export default function useContainer() {
     validationSchema: loginSchema,
   });
 
-  const handleLogin = (data: LoginProps) => {
-    console.log("data", data);
+  const router = useRouter();
+
+  const handleLogin = async (data: LoginProps) => {
+    await login(data)
+      .then((response) => {
+        setCache(CacheKeysEnum.USER, response.data.username);
+        router.push("/tasks");
+      })
+      .catch((error) => console.log(error));
   };
 
   return {

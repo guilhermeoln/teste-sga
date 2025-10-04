@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
     const cookieStore = await cookies();
 
-    cookieStore.set("user", username, {
+    cookieStore.set("@sga/user", username, {
       path: "/",
       httpOnly: true,
       sameSite: "lax",
