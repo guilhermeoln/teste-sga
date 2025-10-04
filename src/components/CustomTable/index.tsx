@@ -11,7 +11,6 @@ import {
   Skeleton,
   Typography,
   IconButton,
-  styled,
 } from "@mui/material";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import Image from "next/image";
