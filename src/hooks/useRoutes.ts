@@ -26,5 +26,6 @@ export default function useRoutes() {
 
   return {
     routes,
+    currentRoute: routes.find(({ path }) => path === pathname),
   };
 }
