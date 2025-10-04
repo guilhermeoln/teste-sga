@@ -19,9 +19,14 @@ export const Form = styled("form")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: "20px",
-  minWidth: "350px",
+  minWidth: "420px",
   padding: "30px",
   backgroundColor: theme.palette.background.default,
   borderRadius: theme.shape.borderRadius,
   border: "1px solid #D7D7D7",
+
+  "@media (max-width:768px)": {
+    padding: "15px",
+    minWidth: "100%",
+  },
 }));
