@@ -6,8 +6,8 @@ import { Wrapper, Label, RequiredText, StyledTextField } from "./styles";
 
 interface LabeledInputProps {
   label?: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   placeholder?: string;
   isRequired?: boolean;

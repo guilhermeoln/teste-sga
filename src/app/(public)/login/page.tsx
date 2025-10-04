@@ -2,32 +2,37 @@
 
 import LabeledInput from "@/components/LabeledInput";
 import { Form, Wrapper } from "./styles";
-import { useState } from "react";
 import { Button } from "@mui/material";
 import Image from "next/image";
+import useContainer from "./useContainer";
 
 export default function Login() {
-  const [user, setUser] = useState("");
+  const { register, errors, handleSubmit, handleLogin } = useContainer();
 
   return (
     <Wrapper>
       <Image src="/images/logo.png" alt="logo" width={60} height={50} />
-      <Form>
+      <Form onSubmit={handleSubmit(handleLogin)}>
         <LabeledInput
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
+          {...register("username")}
           label="Usuário"
           placeholder="Digite o seu usuário"
+          isInvalid={!!errors?.username}
+          errorMessage={errors?.username?.message}
           isRequired
         />
         <LabeledInput
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
+          type="password"
+          {...register("password")}
           label="Senha"
           placeholder="Digite a sua senha"
+          isInvalid={!!errors?.password}
+          errorMessage={errors?.password?.message}
           isRequired
         />
-        <Button variant="contained">Entrar</Button>
+        <Button variant="contained" type="submit">
+          Entrar
+        </Button>
       </Form>
     </Wrapper>
   );
