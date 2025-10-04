@@ -26,7 +26,6 @@ export const Form = styled("form")(({ theme }) => ({
   border: "1px solid #D7D7D7",
 
   "@media (max-width:768px)": {
-    padding: "15px",
     minWidth: "100%",
   },
 }));
