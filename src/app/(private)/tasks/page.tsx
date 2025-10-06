@@ -3,12 +3,13 @@
 import CustomTable from "@/components/CustomTable";
 import { Task } from "@/types";
 import useContainer from "./useContainer";
-import { Button, Dialog, DialogTitle } from "@mui/material";
+import { Box, Button, Dialog, DialogTitle } from "@mui/material";
 import { IoAddCircle } from "react-icons/io5";
 import LabeledInput from "@/components/LabeledInput";
-import { Form } from "./styles";
+import { Form, Wrapper } from "./styles";
 import { TaskSchemaType } from "@/validations/task";
 import LabeledSelect from "@/components/LabeledSelect";
+import { ChangeEvent } from "react";
 
 type TaskDialogProps = {
   open: boolean;
@@ -80,14 +81,37 @@ const TaskModal = ({
 };
 
 export default function Tasks() {
-  const { columns, tasks, isOpen, onClose, createTask, onOpen } =
-    useContainer();
+  const {
+    columns,
+    tasks,
+    isOpen,
+    onClose,
+    createTask,
+    onOpen,
+    search,
+    setSearch,
+  } = useContainer();
 
   return (
-    <>
-      <Button variant="contained" startIcon={<IoAddCircle />} onClick={onOpen}>
-        Criar Tarefa
-      </Button>
+    <Wrapper>
+      <Box width="250px">
+        <Button
+          variant="contained"
+          startIcon={<IoAddCircle />}
+          onClick={onOpen}
+        >
+          Criar Tarefa
+        </Button>
+      </Box>
+      <Box width="250px">
+        <LabeledInput
+          value={search}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setSearch(e.target.value)
+          }
+          placeholder="Filtrar por..."
+        />
+      </Box>
       <CustomTable<Task>
         columns={columns}
         data={tasks}
@@ -95,6 +119,6 @@ export default function Tasks() {
         emptyMessage="Nenhuma tarefa encontrada"
       />
       <TaskModal onClose={onClose} open={isOpen} onSubmit={createTask} />
-    </>
+    </Wrapper>
   );
 }
