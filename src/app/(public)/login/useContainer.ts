@@ -6,6 +6,7 @@ import login from "@/services/serverActions/login";
 import { CacheKeysEnum } from "@/types";
 import loginSchema from "@/validations/login";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type LoginProps = {
   username: string;
@@ -25,7 +26,7 @@ export default function useContainer() {
         setCache(CacheKeysEnum.USER, response.data.username);
         router.push("/tasks");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => toast.error(error));
   };
 
   return {

@@ -6,6 +6,7 @@ import { Task } from "@/types";
 import { taskSchema } from "@/validations/task";
 import { Box, Button, Typography } from "@mui/material";
 import { CiEdit, CiTrash } from "react-icons/ci";
+import { toast } from "react-toastify";
 
 const statusDictionary = {
   pending: "Pendente",
@@ -69,6 +70,7 @@ export default function useContainer() {
               color="error"
               onClick={() => {
                 deleteTask(row.id);
+                toast.success("Tarefa excluida com sucesso!");
               }}
             >
               <CiTrash />
@@ -82,6 +84,7 @@ export default function useContainer() {
   const createTask = (taskData: Omit<Task, "id">) => {
     addTask(taskData);
     onClose();
+    toast.success("Tarefa criada com sucesso!");
     reset({});
   };
 
