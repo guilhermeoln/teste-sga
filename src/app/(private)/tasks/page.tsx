@@ -9,13 +9,13 @@ import LabeledInput from "@/components/LabeledInput";
 import { Form, Wrapper } from "./styles";
 import { TaskSchemaType } from "@/validations/task";
 import LabeledSelect from "@/components/LabeledSelect";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 type TaskDialogProps = {
   open: boolean;
   onClose: () => void;
-  onSubmit: (data: TaskSchemaType) => void;
-  initialData?: Partial<Task>;
+  onSubmit: (data: Omit<TaskSchemaType, "createdAt">) => void;
+  initialData?: Task | null;
 };
 
 const TaskModal = ({
@@ -24,7 +24,16 @@ const TaskModal = ({
   onSubmit,
   initialData,
 }: TaskDialogProps) => {
-  const { register, setValue, errors, handleSubmit } = useContainer();
+  const { register, setValue, errors, handleSubmit, watch } = useContainer();
+
+  useEffect(() => {
+    if (initialData) {
+      setValue("title", initialData.title);
+      setValue("description", initialData.description);
+      setValue("status", initialData.status);
+      setValue("priority", initialData.priority);
+    }
+  }, [initialData, setValue]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -51,6 +60,7 @@ const TaskModal = ({
         <LabeledSelect
           {...register("status")}
           label="Status"
+          value={watch("status")}
           options={[
             { value: "pending", label: "Pendente" },
             { value: "inProgress", label: "Em Progresso" },
@@ -68,6 +78,7 @@ const TaskModal = ({
             { value: "medium", label: "Média" },
             { value: "high", label: "Alta" },
           ]}
+          value={watch("priority")}
           isInvalid={!!errors.priority}
           errorMessage={errors.priority?.message}
           isRequired
@@ -86,10 +97,11 @@ export default function Tasks() {
     tasks,
     isOpen,
     onClose,
-    createTask,
     onOpen,
     search,
     setSearch,
+    selectedTask,
+    handleSave,
   } = useContainer();
 
   return (
@@ -118,7 +130,12 @@ export default function Tasks() {
         rowsPerPage={5}
         emptyMessage="Nenhuma tarefa encontrada"
       />
-      <TaskModal onClose={onClose} open={isOpen} onSubmit={createTask} />
+      <TaskModal
+        onClose={onClose}
+        open={isOpen}
+        onSubmit={handleSave}
+        initialData={selectedTask}
+      />
     </Wrapper>
   );
 }

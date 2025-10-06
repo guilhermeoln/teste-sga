@@ -6,7 +6,7 @@ import useFormValidation from "@/hooks/useFormValidation";
 import { formatDate } from "@/lib/date";
 import useTaskStore from "@/store/useTaskStore";
 import { Task } from "@/types";
-import { taskSchema } from "@/validations/task";
+import { taskSchema, TaskSchemaType } from "@/validations/task";
 import { Box, Button, Typography } from "@mui/material";
 import { useMemo, useState } from "react";
 import { CiEdit, CiTrash } from "react-icons/ci";
@@ -26,14 +26,14 @@ const priorityDictionary = {
 
 export default function useContainer() {
   const [search, setSearch] = useState("");
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
-  const { tasks, addTask, deleteTask } = useTaskStore();
+  const { tasks, addTask, deleteTask, updateTask } = useTaskStore();
 
-  const { errors, handleSubmit, register, setValue, reset } = useFormValidation(
-    {
+  const { errors, handleSubmit, register, setValue, reset, watch } =
+    useFormValidation({
       validationSchema: taskSchema,
-    }
-  );
+    });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -78,7 +78,14 @@ export default function useContainer() {
       render: (row: Task) => {
         return (
           <Box display="flex" justifyContent="center" gap="10px">
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setSelectedTask(row);
+                onOpen();
+              }}
+            >
               <CiEdit />
             </Button>
             <Button
@@ -97,10 +104,18 @@ export default function useContainer() {
     },
   ];
 
-  const createTask = (taskData: Omit<Task, "id">) => {
+  const createTask = (taskData: Omit<Task, "id" | "createdAt">) => {
     addTask(taskData);
     onClose();
     toast.success("Tarefa criada com sucesso!");
+    reset({});
+  };
+
+  const editTask = (taskData: Omit<Task, "createdAt">) => {
+    updateTask(taskData.id, taskData);
+    onClose();
+    setSelectedTask(null);
+    toast.success("Tarefa editada com sucesso!");
     reset({});
   };
 
@@ -128,6 +143,14 @@ export default function useContainer() {
     return filterResult;
   }, [search, tasks]);
 
+  const handleSave = (data: Omit<TaskSchemaType, "createdAt">) => {
+    if (selectedTask) {
+      editTask({ id: selectedTask.id, ...data });
+    } else {
+      createTask(data);
+    }
+  };
+
   return {
     columns,
     tasks: filteredTasks,
@@ -138,8 +161,10 @@ export default function useContainer() {
     isOpen,
     onClose,
     onOpen,
-    createTask,
     search,
     setSearch,
+    selectedTask,
+    watch,
+    handleSave,
   };
 }
