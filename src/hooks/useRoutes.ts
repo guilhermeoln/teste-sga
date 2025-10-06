@@ -3,6 +3,7 @@
 import { Route } from "@/types";
 import { usePathname } from "next/navigation";
 import { FaList } from "react-icons/fa";
+import { RiFileListLine } from "react-icons/ri";
 
 const getRouteIsActiveByPathname = (
   currentPathname: string,
@@ -21,6 +22,13 @@ export default function useRoutes() {
       path: "/tasks",
       isActive: getRouteIsActiveByPathname(pathname, "/tasks"),
       icon: FaList,
+    },
+    {
+      id: "logs",
+      label: "Logs",
+      path: "/logs",
+      isActive: getRouteIsActiveByPathname(pathname, "/logs"),
+      icon: RiFileListLine,
     },
   ];
 

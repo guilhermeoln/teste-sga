@@ -17,8 +17,17 @@ export type Task = {
   createdAt: Date;
 };
 
+export type Log = {
+  id: string;
+  task: string;
+  user: string;
+  action: string;
+  createdAt: Date;
+};
+
 export enum CacheKeysEnum {
   USER = "@sga/user",
   TASKS = "@sga/tasks",
   TAGS = "@sga/tags",
+  LOGS = "@sga/logs",
 }

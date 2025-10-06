@@ -108,7 +108,7 @@ export default function useContainer() {
     addTask(taskData);
     onClose();
     toast.success("Tarefa criada com sucesso!");
-    reset({});
+    window.location.reload();
   };
 
   const editTask = (taskData: Omit<Task, "createdAt">) => {

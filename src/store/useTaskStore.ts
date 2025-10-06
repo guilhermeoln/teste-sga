@@ -1,6 +1,7 @@
 import { CacheKeysEnum, Task } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import useLogStore from "./useLogStore";
 
 interface TaskStore {
   tasks: Task[];
@@ -15,25 +16,52 @@ const useTaskStore = create<TaskStore>()(
     (set) => ({
       tasks: [],
 
-      addTask: (taskData) =>
-        set((state) => ({
-          tasks: [
-            ...state.tasks,
-            { id: crypto.randomUUID(), createdAt: new Date(), ...taskData },
-          ],
-        })),
+      addTask: (taskData) => {
+        const newTask = {
+          id: crypto.randomUUID(),
+          createdAt: new Date(),
+          ...taskData,
+        };
+        set((state) => ({ tasks: [...state.tasks, newTask] }));
 
-      updateTask: (id, updatedTask) =>
+        // salvar log
+        useLogStore.getState().createLog({
+          task: newTask.title ?? "-",
+          action: `Criou a tarefa "${newTask.title}".`,
+        });
+      },
+
+      updateTask: (id, updatedTask) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id ? { ...task, ...updatedTask } : task
           ),
-        })),
+        }));
 
-      deleteTask: (id) =>
+        const taskTitle = useTaskStore
+          .getState()
+          .tasks.find((t) => t.id === id)?.title;
+
+        useLogStore.getState().createLog({
+          task: taskTitle ?? "-",
+          action: `Editou a tarefa "${taskTitle}".`,
+        });
+      },
+
+      deleteTask: (id) => {
+        const taskTitle = useTaskStore
+          .getState()
+          .tasks.find((t) => t.id === id)?.title;
+
         set((state) => ({
           tasks: state.tasks.filter((task) => task.id !== id),
-        })),
+        }));
+
+        useLogStore.getState().createLog({
+          task: taskTitle ?? "-",
+          action: `Excluiu a tarefa "${taskTitle}".`,
+        });
+      },
 
       clearTasks: () => set({ tasks: [] }),
     }),
