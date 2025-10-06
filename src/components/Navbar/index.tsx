@@ -49,8 +49,7 @@ export default function Navbar() {
         <IconButton
           sx={{ gap: "10px" }}
           onClick={() => {
-            logout();
-            router.push("/login");
+            logout().then(() => router.push("/login"));
           }}
         >
           <CiLogout size={22} />
