@@ -116,7 +116,7 @@ export default function useContainer() {
     onClose();
     setSelectedTask(null);
     toast.success("Tarefa editada com sucesso!");
-    reset({});
+    window.location.reload();
   };
 
   const filteredTasks = useMemo(() => {
