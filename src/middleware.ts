@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { CacheKeysEnum } from "./types";
 
-const PRIVATE_ROUTES = ["/tasks"];
+const PRIVATE_ROUTES = ["/tasks", "/logs"];
 
 const PUBLIC_ROUTES = ["/login"];
 
