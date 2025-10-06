@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 type LoginParams = {
   username: string;
   password: string;
@@ -15,6 +17,7 @@ const login = async (params: LoginParams) => {
   const data = await response.json();
 
   if (!response.ok) {
+    toast.error(data.error);
     throw new Error(data.error);
   }
 
