@@ -88,13 +88,7 @@ export default function CustomTable<T>({
                   py={5}
                   gap={5}
                 >
-                  <Image
-                    src="/empty-data.svg"
-                    alt="Sem dados"
-                    width={150}
-                    height={150}
-                  />
-                  <Typography fontWeight={600} fontSize={22}>
+                  <Typography fontWeight={600} variant="h2">
                     {emptyMessage}
                   </Typography>
                 </Box>
