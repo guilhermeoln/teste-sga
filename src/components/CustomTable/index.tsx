@@ -13,7 +13,6 @@ import {
   IconButton,
 } from "@mui/material";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
-import Image from "next/image";
 import useContainer from "./useContainer";
 import { PageNumberBox, PaginationWrapper, TableWrapper } from "./styles";
 

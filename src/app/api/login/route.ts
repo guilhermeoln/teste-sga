@@ -1,3 +1,4 @@
+import { CacheKeysEnum } from "@/types";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest) {
 
     const cookieStore = await cookies();
 
-    cookieStore.set("@sga/user", username, {
+    cookieStore.set(CacheKeysEnum.USER, username, {
       path: "/",
       httpOnly: true,
       sameSite: "lax",

@@ -15,6 +15,7 @@ export default function useFormValidation<T extends AnyObjectSchema>({
     formState: { errors },
     watch,
     setValue,
+    reset,
   } = useForm<InferType<T>>({
     resolver: yupResolver(validationSchema),
   });
@@ -25,5 +26,6 @@ export default function useFormValidation<T extends AnyObjectSchema>({
     register,
     handleSubmit,
     setValue,
+    reset,
   };
 }
