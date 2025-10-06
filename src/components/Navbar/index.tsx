@@ -18,6 +18,8 @@ type NavItemProps = {
 };
 
 function NavItem({ label, isActive, icon: Icon, path }: NavItemProps) {
+  const router = useRouter();
+
   return (
     <NavItemWrapper isActive={isActive} onClick={() => router.push(path)}>
       <Icon size={20} color={isActive ? "white" : "black"} />
