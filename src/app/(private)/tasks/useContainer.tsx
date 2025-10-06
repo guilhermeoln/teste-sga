@@ -46,6 +46,7 @@ export default function useContainer() {
       key: "priority",
       label: "Prioridade",
       align: "center",
+      sortable: true,
       render: (row: Task) => (
         <Typography variant="body2">
           {priorityDictionary[row.priority]}
@@ -56,6 +57,7 @@ export default function useContainer() {
       key: "status",
       label: "Status",
       align: "center",
+      sortable: true,
       render: (row: Task) => (
         <Typography variant="body2">{statusDictionary[row.status]}</Typography>
       ),

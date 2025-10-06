@@ -11,6 +11,7 @@ import {
   Skeleton,
   Typography,
   IconButton,
+  TableSortLabel,
 } from "@mui/material";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import useContainer from "./useContainer";
@@ -22,6 +23,7 @@ export interface Column<T> {
   align?: "left" | "center" | "right";
   width?: string | number;
   render?: (row: T, rowIndex: number) => React.ReactNode;
+  sortable?: boolean;
 }
 
 export interface CustomTableProps<T> {
@@ -46,6 +48,8 @@ export default function CustomTable<T>({
     handleNextPage,
     handlePrevPage,
     skeletonRows,
+    handleSort,
+    sortConfig,
     currentPage,
     totalPages,
   } = useContainer<T>({ rowsPerPage, data });
@@ -55,17 +59,39 @@ export default function CustomTable<T>({
       <Table size="small">
         <TableHead>
           <TableRow>
-            {columns.map((col, colIndex) => (
-              <TableCell
-                key={colIndex}
-                align={col.align || "left"}
-                sx={{ padding: "15px", width: col.width || "auto" }}
-              >
-                {col.label}
-              </TableCell>
-            ))}
+            {columns.map((col, colIndex) => {
+              const isActive = sortConfig.key === col.key;
+
+              return (
+                <TableCell
+                  key={colIndex}
+                  align={col.align || "left"}
+                  sx={{
+                    padding: "15px",
+                    width: col.width || "auto",
+                    cursor: col.sortable ? "pointer" : "default",
+                  }}
+                  onClick={col.sortable ? () => handleSort(col.key) : undefined}
+                >
+                  {col.sortable ? (
+                    <TableSortLabel
+                      active={isActive}
+                      direction={
+                        isActive && sortConfig.order ? sortConfig.order : "asc"
+                      }
+                      hideSortIcon={!isActive}
+                    >
+                      {col.label}
+                    </TableSortLabel>
+                  ) : (
+                    col.label
+                  )}
+                </TableCell>
+              );
+            })}
           </TableRow>
         </TableHead>
+
         <TableBody>
           {isLoading ? (
             skeletonRows.map((_, rowIndex) => (
