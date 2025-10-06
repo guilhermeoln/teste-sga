@@ -4,11 +4,23 @@ import useFormValidation from "@/hooks/useFormValidation";
 import useTaskStore from "@/store/useTaskStore";
 import { Task } from "@/types";
 import { taskSchema } from "@/validations/task";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { CiEdit, CiTrash } from "react-icons/ci";
 
+const statusDictionary = {
+  pending: "Pendente",
+  inProgress: "Em Progresso",
+  done: "Concluída",
+};
+
+const priorityDictionary = {
+  low: "Pendente",
+  medium: "Média",
+  high: "Alta",
+};
+
 export default function useContainer() {
-  const { tasks, addTask } = useTaskStore();
+  const { tasks, addTask, deleteTask } = useTaskStore();
 
   const { errors, handleSubmit, register, setValue, reset } = useFormValidation(
     {
@@ -20,9 +32,28 @@ export default function useContainer() {
 
   const columns: Column<Task>[] = [
     { key: "title", label: "Título" },
-    { key: "description", label: "Descrição" },
-    { key: "priority", label: "Prioridade", align: "center" },
-    { key: "status", label: "Status", align: "center" },
+    {
+      key: "description",
+      label: "Descrição",
+    },
+    {
+      key: "priority",
+      label: "Prioridade",
+      align: "center",
+      render: (row: Task) => (
+        <Typography variant="body2">
+          {priorityDictionary[row.priority]}
+        </Typography>
+      ),
+    },
+    {
+      key: "status",
+      label: "Status",
+      align: "center",
+      render: (row: Task) => (
+        <Typography variant="body2">{statusDictionary[row.status]}</Typography>
+      ),
+    },
     {
       key: "id",
       label: "Ações",
@@ -33,7 +64,13 @@ export default function useContainer() {
             <Button variant="contained" color="primary">
               <CiEdit />
             </Button>
-            <Button variant="contained" color="error">
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => {
+                deleteTask(row.id);
+              }}
+            >
               <CiTrash />
             </Button>
           </Box>
