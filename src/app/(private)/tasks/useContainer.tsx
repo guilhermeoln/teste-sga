@@ -3,6 +3,7 @@
 import { Column } from "@/components/CustomTable";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import useFormValidation from "@/hooks/useFormValidation";
+import { formatDate } from "@/lib/date";
 import useTaskStore from "@/store/useTaskStore";
 import { Task } from "@/types";
 import { taskSchema } from "@/validations/task";
@@ -60,6 +61,14 @@ export default function useContainer() {
       sortable: true,
       render: (row: Task) => (
         <Typography variant="body2">{statusDictionary[row.status]}</Typography>
+      ),
+    },
+    {
+      key: "createdAt",
+      label: "Criado em",
+      sortable: true,
+      render: (row: Task) => (
+        <Typography variant="body2">{formatDate(row.createdAt)}</Typography>
       ),
     },
     {

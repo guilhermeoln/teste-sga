@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 
 interface TaskStore {
   tasks: Task[];
-  addTask: (task: Omit<Task, "id">) => void;
+  addTask: (task: Omit<Task, "id" | "createdAt">) => void;
   updateTask: (id: string, updatedTask: Partial<Task>) => void;
   deleteTask: (id: string) => void;
   clearTasks: () => void;
@@ -17,7 +17,10 @@ const useTaskStore = create<TaskStore>()(
 
       addTask: (taskData) =>
         set((state) => ({
-          tasks: [...state.tasks, { id: crypto.randomUUID(), ...taskData }],
+          tasks: [
+            ...state.tasks,
+            { id: crypto.randomUUID(), createdAt: new Date(), ...taskData },
+          ],
         })),
 
       updateTask: (id, updatedTask) =>

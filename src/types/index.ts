@@ -14,6 +14,7 @@ export type Task = {
   description: string;
   priority: "low" | "medium" | "high";
   status: "pending" | "inProgress" | "done";
+  createdAt: Date;
 };
 
 export enum CacheKeysEnum {
