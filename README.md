@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Teste Técnico - SGA (Front  End Developer PL)
 
-## Getting Started
+Este projeto foi desenvolvido como parte de um **teste técnico para a vaga de Desenvolvedor Front End** na empresa **SGA**.  
+A aplicação foi construída utilizando **Next.js**, seguindo boas práticas de desenvolvimento e organização de código.
 
-First, run the development server:
+## 📦 Tecnologias utilizadas
+
+- [Next.js](https://nextjs.org/) – Framework React para aplicações web modernas.
+- [React](https://reactjs.org/) – Biblioteca para construir interfaces de usuário.
+- [Material UI](https://mui.com/material-ui/) – Biblioteca de componentes estilizados e responsivos.
+- [React Hook Form](https://react-hook-form.com/) – Validação e gerenciamento de formulários.
+- [Vercel](https://vercel.com/) – Plataforma de deploy e hospedagem de front-end.
+
+### 🛠️ Como rodar o projeto localmente
+
+## 1. Clonar o repositório
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/guilhermeoln/teste-sga.git
+cd testesga
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 2. Instalar dependências
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ou
 
-## Learn More
+yarn install
 
-To learn more about Next.js, take a look at the following resources:
+ou
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+pnpm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ou
 
-## Deploy on Vercel
+bun install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 3. Rodar o servidor de desenvolvimento
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm run dev
+
+ou
+
+yarn dev
+
+ou
+
+pnpm dev
+
+ou
+
+bun dev
+
+## O projeto ficará disponível em: http://localhost:3000
+
+## Deploy (Produção)
+
+O projeto está hospedado na Vercel e pode ser acessado no seguinte link:
+
+👉 https://teste-sga.vercel.app
+
+## Autor
+
+- [José Guilherme](https://www.linkedin.com/in/joseguilhermedev/)
