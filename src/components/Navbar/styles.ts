@@ -8,6 +8,7 @@ export const Wrapper = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   width: "100%",
   backgroundColor: theme.palette.background.paper,
+  justifyContent: "space-between",
 }));
 
 export const NavItemWrapper = styled(Box, {
